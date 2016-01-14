@@ -28,19 +28,6 @@ class ViewController: NSViewController {
         }
     }
 
-    func not (b: Bool) -> Bool
-    {
-        return (!b)
-    }
-    
-    func suspendprocess (t: Double)
-    {
-        let secs: Int = Int(abs(t))
-        let nanosecs: Int = Int((abs(t) - Double(Int(abs(t)))) * 1000000000)
-        var time = timespec(tv_sec: secs, tv_nsec: nanosecs)
-        let result = nanosleep(&time, nil)
-    }
-    
     @IBAction func selectFileClick(sender: AnyObject) {
 
         let fileTypeArray: [String] = "csv".componentsSeparatedByString(",")
@@ -66,38 +53,7 @@ class ViewController: NSViewController {
             
         }
         
-        
-//        suspendprocess (0.02) // Wait 20 ms., enough time to do screen updates regarding to the background job, which calls this function
-//        dispatch_async(dispatch_get_main_queue())
-//            {
-//                let myFiledialog: NSOpenPanel = NSOpenPanel()
-//                let fileTypeArray: [String] = filetypelist.componentsSeparatedByString(",")
-//                
-//                myFiledialog.prompt = "Open"
-//                myFiledialog.worksWhenModal = true
-//                myFiledialog.allowsMultipleSelection = false
-//                myFiledialog.canChooseDirectories = false
-//                myFiledialog.resolvesAliases = true
-//                myFiledialog.title = windowTitle
-//                myFiledialog.message = message
-//                myFiledialog.allowedFileTypes = fileTypeArray
-//                
-//                let void = myFiledialog.runModal()
-//                
-//                var chosenfile = myFiledialog.URL // Pathname of the file
-//                
-//                if (chosenfile != nil)
-//                {
-//                    self.fileName = chosenfile!.absoluteString
-//                }
-//                finished = true
-//        }
-//        
-//        while not(finished)
-//        {
-//            suspendprocess (0.001) // Wait 1 ms., loop until main thread finished
-//        }
-    }
+}
 
     @IBAction func processFileClick(sender: AnyObject) {
         
@@ -109,15 +65,17 @@ class ViewController: NSViewController {
             }
         }
         
-        //let inputString = "Year,Make,Model,Description,Price\r\n1997,Ford,E350,descrition,3000.00\r\n1999,Chevy,Venture,another description,4900.00\r\n"
         let csv = CSwiftV(String: inputString! as String)
         
-        let headers = csv.headers // ["Year","Make","Model","Description","Price"]
         let rows = csv.rows
-        NSLog("HEADERS - \(headers)")
-        NSLog("ROWS - \(rows)")
-        
-        self.outputTextView.string = String(format: "%@", rows)
+        self.outputTextView.string = ""
+        for (index, item) in rows.enumerate() {
+            //print("Found \(item) at position \(index)")
+            var text = item[0] + "\" = \"" + item[1] + "\";\n"
+            text = "\"" + text
+            let attrString = NSAttributedString(string: text)
+            self.outputTextView.textStorage!.appendAttributedString(attrString)
+        }
     }
 }
 

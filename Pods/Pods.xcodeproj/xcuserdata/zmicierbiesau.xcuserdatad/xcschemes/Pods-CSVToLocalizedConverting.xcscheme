@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '22FE2639016EE91B8FD5642D'
+               BlueprintIdentifier = 'C87034D089FA2592E68A75E6'
                BlueprintName = 'Pods-CSVToLocalizedConverting'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_CSVToLocalizedConverting.framework'>
