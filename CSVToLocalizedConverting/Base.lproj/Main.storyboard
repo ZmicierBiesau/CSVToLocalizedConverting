@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6198" systemVersion="14A297b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6198"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -641,12 +641,12 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="CSVToLocalizedConverting" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
-        <!--Window Controller - Window-->
+        <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
@@ -664,18 +664,119 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--View Controller-->
+        <!--CSV To Localized Converter-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="CSV To Localized Converter" id="XfG-lQ-9wD" customClass="ViewController" customModule="CSVToLocalizedConverting" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="284"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="92P-Wf-LBg">
+                                <rect key="frame" x="276" y="223" width="103" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="91" id="JTY-An-35Z"/>
+                                    <constraint firstAttribute="height" constant="21" id="PPq-P0-XGE"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Select File" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Imu-ut-7Bl">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="selectFileClick:" target="XfG-lQ-9wD" id="TPS-Cp-RGg"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xbm-5E-tUp">
+                                <rect key="frame" x="385" y="223" width="81" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="69" id="6mF-F1-0XZ"/>
+                                    <constraint firstAttribute="height" constant="21" id="EE3-Ne-7Hr"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Process" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6hk-Fs-nHL">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="processFileClick:" target="XfG-lQ-9wD" id="VPg-tY-ODX"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Sw5-IF-gWh">
+                                <rect key="frame" x="20" y="228" width="231" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="usg-pt-DYh"/>
+                                </constraints>
+                                <buttonCell key="cell" type="roundTextured" title="\file_name" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FIW-39-hVE">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="selectFileClick:" target="XfG-lQ-9wD" id="xwv-XB-H9f"/>
+                                </connections>
+                            </button>
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FC9-K1-cny">
+                                <rect key="frame" x="20" y="52" width="440" height="165"/>
+                                <clipView key="contentView" id="mzN-gF-fe7">
+                                    <rect key="frame" x="1" y="1" width="438" height="163"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="vB8-ki-BcW">
+                                            <rect key="frame" x="0.0" y="0.0" width="438" height="163"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <size key="minSize" width="438" height="163"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                            <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <size key="minSize" width="438" height="163"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="PJ3-MH-iXi">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="36I-Dr-QIP">
+                                    <rect key="frame" x="423" y="1" width="16" height="163"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="azy-wE-WPa">
+                                <rect key="frame" x="333" y="13" width="133" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="121" id="Pxa-qk-AOq"/>
+                                    <constraint firstAttribute="height" constant="21" id="grU-Ja-pnJ"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Save in file" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xCa-p9-ZJL">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="xbm-5E-tUp" secondAttribute="trailing" constant="20" id="2IA-vF-GO1"/>
+                            <constraint firstItem="Sw5-IF-gWh" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="41h-Dc-JfX"/>
+                            <constraint firstAttribute="bottom" secondItem="azy-wE-WPa" secondAttribute="bottom" constant="20" id="GaZ-S8-94T"/>
+                            <constraint firstAttribute="trailing" secondItem="azy-wE-WPa" secondAttribute="trailing" constant="20" id="LiW-6h-J0P"/>
+                            <constraint firstItem="xbm-5E-tUp" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="33" id="Q47-6G-s9x"/>
+                            <constraint firstItem="92P-Wf-LBg" firstAttribute="leading" secondItem="Sw5-IF-gWh" secondAttribute="trailing" constant="31" id="S0c-hc-oI2"/>
+                            <constraint firstItem="Sw5-IF-gWh" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="32" id="TZm-7w-DX9"/>
+                            <constraint firstItem="92P-Wf-LBg" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="33" id="VNg-KC-9aL"/>
+                            <constraint firstItem="FC9-K1-cny" firstAttribute="top" secondItem="Sw5-IF-gWh" secondAttribute="bottom" constant="13" id="fI6-wi-8AV"/>
+                            <constraint firstItem="FC9-K1-cny" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="g4G-ZB-5B7"/>
+                            <constraint firstItem="azy-wE-WPa" firstAttribute="top" secondItem="FC9-K1-cny" secondAttribute="bottom" constant="11" id="iGk-5e-Bh8"/>
+                            <constraint firstAttribute="trailing" secondItem="FC9-K1-cny" secondAttribute="trailing" constant="20" id="pV4-AQ-y2I"/>
+                            <constraint firstItem="xbm-5E-tUp" firstAttribute="leading" secondItem="92P-Wf-LBg" secondAttribute="trailing" constant="18" id="yk0-LJ-VrS"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="fileNameButton" destination="Sw5-IF-gWh" id="odh-5h-3aH"/>
+                        <outlet property="outputTextView" destination="vB8-ki-BcW" id="vHg-V5-Z2E"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="75" y="662"/>
         </scene>
     </scenes>
 </document>
