@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A4B4F1037BB4F01B62BA3D4B /* Pods_CSVToLocalizedConverting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D37CC10C2A2F6E92CDE94DC /* Pods_CSVToLocalizedConverting.framework */; };
+		FB588A1D1C639D9C00BD6C3E /* SourceCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB588A1C1C639D9C00BD6C3E /* SourceCollectionItem.swift */; };
 		FC3637221C47838700222715 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3637211C47838700222715 /* AppDelegate.swift */; };
 		FC3637241C47838700222715 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3637231C47838700222715 /* ViewController.swift */; };
 		FC3637261C47838700222715 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC3637251C47838700222715 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 		2D37CC10C2A2F6E92CDE94DC /* Pods_CSVToLocalizedConverting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CSVToLocalizedConverting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EE35AEC3A901063CBC71197 /* Pods-CSVToLocalizedConverting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSVToLocalizedConverting.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CSVToLocalizedConverting/Pods-CSVToLocalizedConverting.debug.xcconfig"; sourceTree = "<group>"; };
 		EB4CB973E38F87C9F58E84CD /* Pods-CSVToLocalizedConverting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSVToLocalizedConverting.release.xcconfig"; path = "Pods/Target Support Files/Pods-CSVToLocalizedConverting/Pods-CSVToLocalizedConverting.release.xcconfig"; sourceTree = "<group>"; };
+		FB588A1C1C639D9C00BD6C3E /* SourceCollectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceCollectionItem.swift; sourceTree = "<group>"; };
 		FC36371E1C47838700222715 /* CSVToLocalizedConverting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CSVToLocalizedConverting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC3637211C47838700222715 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC3637231C47838700222715 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				FC3637251C47838700222715 /* Assets.xcassets */,
 				FC3637271C47838700222715 /* Main.storyboard */,
 				FC36372A1C47838700222715 /* Info.plist */,
+				FB588A1C1C639D9C00BD6C3E /* SourceCollectionItem.swift */,
 			);
 			path = CSVToLocalizedConverting;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 			files = (
 				FC3637241C47838700222715 /* ViewController.swift in Sources */,
 				FC3637221C47838700222715 /* AppDelegate.swift in Sources */,
+				FB588A1D1C639D9C00BD6C3E /* SourceCollectionItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,7 +467,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CSVToLocalizedConverting/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maxvale.CSVToLocalizedConverting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -477,7 +481,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CSVToLocalizedConverting/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maxvale.CSVToLocalizedConverting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
