@@ -9,7 +9,7 @@
 import Cocoa
 import CSwiftV
 
-class ViewController: NSViewController, NSCollectionViewDataSource, NSCollectionViewDelegate {
+class ViewController: NSViewController, NSCollectionViewDataSource {
 
     
     @IBOutlet weak var collectionView: NSCollectionView!
@@ -18,13 +18,20 @@ class ViewController: NSViewController, NSCollectionViewDataSource, NSCollection
     var fileName: NSString?
     var contentOfFile: NSArray?
     var parsedCSV: CSwiftV?
+    var titles = [["Banana", "Apple", "Strawberry"], ["Cherry", "Pear", "Pineapple"], ["Grape", "Melon"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
-       // self.collectionView.itemPrototype = self.storyboard!.instantiateControllerWithIdentifier("SourceCollectionItem") as! SourceCollectionItem
-        // Do any additional setup after loading the view.
+        
+        
+        
+        collectionView!.itemPrototype = SourceCollectionItem()
+       // collectionView!.content = titles
+        collectionView.dataSource = self
+    
+        
+        //self.updateCollectionView()
+        
     }
 
     override var representedObject: AnyObject? {
@@ -110,8 +117,8 @@ class ViewController: NSViewController, NSCollectionViewDataSource, NSCollection
             let attrString = NSAttributedString(string: text)
             self.outputTextView.textStorage!.appendAttributedString(attrString)
         }
-        
-        self.collectionView.needsDisplay = true
+        self.titles = self.parsedCSV!.rows
+        //self.updateCollectionView(self.parsedCSV!.rows)
     }
     
     private func saveFile(exportedUrl: NSURL)
@@ -138,28 +145,43 @@ class ViewController: NSViewController, NSCollectionViewDataSource, NSCollection
  
     }
     
-    //MARK: NSCollectionViewDataSource
-    func collectionView(collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int
+    //MARK: Setting table of strings
+    
+    func updateCollectionView(array:[[String]])
     {
-        NSLog("NUMBER OF ROWS")
-        return 30// self.parsedCSV!.rows.count * self.parsedCSV!.headers.count
+//        for index in 0..<array.count
+//        {
+//            NSLog("NEW Row - %@", array[index])
+//        }
+       // self.collectionView.content = array
+        self.titles = array
+        self.updateCollectionView()
     }
-    func collectionView(collectionView: NSCollectionView, itemForRepresentedObjectAtIndexPath indexPath: NSIndexPath) -> NSCollectionViewItem
+    func updateCollectionView()
     {
-        let cell = SourceCollectionItem()//collectionView.makeItemWithIdentifier("SourceCollectionItem", forIndexPath: indexPath) as! SourceCollectionItem
-        cell.textField?.stringValue = "1"
-        cell.textLabelField.stringValue = "2"
-        let label = NSTextField(frame: CGRectMake(0, 0, 100, 30))
-        label.bezeled = false
-        label.drawsBackground = false
-        label.editable = false
-        label.selectable = false
-        label.stringValue = "3"
-        label.textColor = NSColor.blackColor()
-        cell.view.addSubview(label)
+        for index in 0..<self.titles.count {
+            for index2 in 0..<self.titles[index].count
+            {
+                let item = self.collectionView!.itemAtIndex(index * self.titles[index].count + index2) as! SourceCollectionItem
+                item.textValue = self.titles[index][index2]
+                
+            }
             
-        
-        return cell
+            
+        }
     }
+    
+    // MARK: NSCollectionViewDataSource
+    
+    func collectionView(collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.titles.count * self.titles[0].count
+    }
+    
+    func collectionView(collectionView: NSCollectionView, itemForRepresentedObjectAtIndexPath indexPath: NSIndexPath) -> NSCollectionViewItem {
+        let item = collectionView.makeItemWithIdentifier("SourceCollectionItem", forIndexPath: indexPath)
+        item.representedObject = LabelObject(title: self.titles[indexPath.item])
+        return item
+    }
+    
 }
 
